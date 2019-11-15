@@ -2,6 +2,10 @@ from graph import *
 from math import sin,cos
 
 pi=3.1415
+red=255
+green=255
+blue=255
+
 
 def linia(x):
     return(x+20*sin(-0.05*x)+30*sin(-0.03*x)+10*sin(-0.1*x)+24*sin(-0.02*x))
@@ -30,15 +34,17 @@ def drevo(x,y,h):
     circle(x-h/8,y-h,h/5)
     penColor(0,0,0)
     
-def oblako(x,y,r):
+def oblako(x,y,r,o):
     penColor(255,255,255)
     brushColor(255,255,255)
-    circle(x,y,0.7*r)
-    circle(x+2*r,y,r/2)
-    circle(x+r,y,0.8*r)
-    circle(x+1.6*r,y-0.65*r,0.6*r)
-    circle(x+r/2,y-0.7*r,r/1.4)
+    o[0]=circle(x,y,0.7*r)
+    o[1]=circle(x+2*r,y,r/2)
+    o[2]=circle(x+r,y,0.8*r)
+    o[3]=circle(x+1.6*r,y-0.65*r,0.6*r)
+    o[4]=circle(x+r/2,y-0.7*r,r/1.4)
     penColor(0,0,0)
+
+    
     
 def zmey(x,y,h):
 #x,y - точка крепления ниточки к змею
@@ -66,7 +72,15 @@ def sun(x,y,r,n):
         i+=2
     brushColor(247,251,54)
     polygon(A)
+ 
+def veter(t):
+    def upd1():
+        moveObjectBy(t,1,0)
+    onTimer(upd1,50) 
     
+def groza():
+    pass
+
 
 #рисую фон    
 brushColor(100,168,66)
@@ -74,19 +88,35 @@ rectangle(0,350,500,600)
 brushColor(158, 219, 247)
 rectangle(0,0,500,350)
 
+
+    
+o1=[1,2,3,4,5]
+o2=[1,2,3,4,5]
+o3=[1,2,3,4,5]
+
+
 #рисую объекты
 domik(130,320,110)
 domik(320, 300, 60)
 drevo(110,490,110)
 drevo(450,380,90)
 drevo(50,520,140)
-oblako(100,150,40)
-oblako(250,100,50)
-oblako(30,70,30)
 sun(420,90,30,12)
+oblako(100,150,40,o1)
+oblako(250,100,50,o2)
+oblako(30,70,30,o3)
 brushColor(255,173,9)
 zmey(280,100,60)
 brushColor(252,71,231)
 zmey(180,170,-70)
 
+#анимация
+for i in range(5):
+    veter(o1[i])
+for i in range(5):
+    veter(o2[i])
+for i in range(5):
+    veter(o3[i])
+
+    
 run()
