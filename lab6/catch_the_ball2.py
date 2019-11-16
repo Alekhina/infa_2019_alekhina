@@ -44,19 +44,30 @@ class Ball:
         pass
 
 def tick():
-    ball.move()
+    for ball in balls:
+        ball.move()
     root.after(10,tick)
+   
+    
+def new_ball():
+    canv.delete(balls[0])
+    balls[0]=balls[1]
+    balls[1]=balls[2]
+    balls[2]=Ball()
+    root.after(1000,new_ball)
 
 def main():
-    global root,canv,ball
+    global root,canv,balls
     root=Tk()
     root.geometry('800x600')
 
     canv=Canvas(root,bg='white')
     canv.pack(fill=BOTH,expand=1)
-
-    ball=Ball()
+    
+    balls=[Ball() for i in range (3)]
+    
     tick()
+    new_ball()
         
     root.mainloop()
     
