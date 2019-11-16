@@ -7,6 +7,7 @@ root.geometry('800x600')
 canv=Canvas(root,bg='white')
 canv.pack(fill=BOTH,expand=1)
 
+
 colors=['red','orange','yellow','green','blue']
 def new_ball():
     """создает шарики случайного размера в случайной точке экрана
@@ -26,6 +27,7 @@ def click(event):
         score+=1
         print('Score: ', score)
     
-new_ball()
+
 canv.bind('<Button-1>', click)
+new_ball()
 mainloop()
